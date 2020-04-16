@@ -27,7 +27,7 @@ Deploy to your server to access the API.
 
 ### Bookmarking
 
-* Create a Bookmark -POST- http://localhost:3000/bookmarks/create
+* Create a Bookmark -POST- http://yoursite/bookmarks/create
 
 ```json
 {
@@ -36,7 +36,24 @@ Deploy to your server to access the API.
 	"publisher":"Google"
 }
 ```
-* Delete a bookmark -DELETE- http://localhost:3000/bookmarks/:id
+* Delete a bookmark -DELETE- http://yoursite/bookmarks/:id
+
+### Tag
+
+* Create a tag -POST- /tags/create
+```json
+{
+	"title":"google"
+}
+```
+* Delete a tag -DELETE- /tags/:id
+* Add Tag to bookmark -PUT- /tags/:tagid/:bmarkid
+* Remove tag from bookmark -PUT- /remtag/:tagid
+
+### Displaying
+
+* Display bookmarks -GET- /bookmarks
+* Display tags -GET- /tags
 
 ## Authors
 
