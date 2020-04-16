@@ -1,6 +1,6 @@
 # cloudmark-api
 
-A Simple bookmark CRUD API.
+A Simple bookmark CRUD API built using NodeJS.
 
 ## Getting Started
 
