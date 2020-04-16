@@ -17,23 +17,18 @@ app.get('/', (request, response) => {
   });
 
 // Bookmark routes
-app.post('/api/bookmarks/create',(request,response) => {
+app.post('/bookmarks/create',queries.addBookmark);
 
-
-});
-
-app.delete('/api/bookmarks',(request,response)=>{
-
-});
+app.delete('/bookmarks/:id',queries.deleteBookmark);
 
 
 // Tag Routes
-app.post('/api/tags/create',(request,response) => {
+app.post('/tags/create',(request,response) => {
 
 
 });
 
-app.delete('/api/tags',(request,response)=>{
+app.delete('/tags',(request,response)=>{
 
 });
 
