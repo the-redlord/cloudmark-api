@@ -23,6 +23,21 @@ Deploy to your server to access the API.
 * ExpressJS
 * Postgresql
 
+## Usage
+
+### Bookmarking
+
+* Create a Bookmark -POST- http://localhost:3000/bookmarks/create
+
+```json
+{
+	"link":"https://www.google.com",
+	"title":"Google",
+	"publisher":"Google"
+}
+```
+* Delete a bookmark -DELETE- http://localhost:3000/bookmarks/:id
+
 ## Authors
 
 * **Chinmay Sharma**
