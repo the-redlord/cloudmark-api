@@ -1,0 +1,23 @@
+{
+  "name": "cloudmark-api",
+  "version": "1.0.0",
+  "description": "Simple Bookmarks API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-redlord/cloudmark-api.git"
+  },
+  "author": "Chinmay Sharma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/the-redlord/cloudmark-api/issues"
+  },
+  "homepage": "https://github.com/the-redlord/cloudmark-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.0.2"
+  }
+}
