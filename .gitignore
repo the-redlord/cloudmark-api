@@ -1,2 +1,4 @@
 **/node_modules
 sql_config.js
+/.env
+**/sql_file

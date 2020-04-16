@@ -2,6 +2,8 @@
 
 A Simple bookmark CRUD API built using NodeJS.
 
+Deployed on heroku: https://cloudmark-api.herokuapp.com/
+
 ## Getting Started
 
 1. git clone https://github.com/the-redlord/cloudmark-api.git
