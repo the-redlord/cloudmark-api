@@ -31,9 +31,57 @@ const deleteBookmark = (request,response) => {
     })
 };
 
+// tags queries
+const addTag = (request,response) => {
+    let {title} = request.body;
+    db.query('INSERT INTO tags (title,time_created,time_updated,bookmark_uuid) VALUES ($1,$2,$3,null)',[title,getTimestamp(),getTimestamp()], (error, results) => {
+        if (error) {
+            response.status(400).send('ERROR 400: Bad Request!')
+            throw error
+        }
+        response.status(201).send('SUCCESS 201: Tag added')
+    })
+
+};
+
+const deleteTag = (request,response) => {
+    let tagid = parseInt(request.params.id);
+    db.query('DELETE FROM tags WHERE tagID=$1',[tagid], (error, results) => {
+        if (error) {
+            response.status(400).send('ERROR 400: Bad Request!')
+            throw error
+        }
+        response.status(200).send('SUCCESS 200: Tag deleted')
+    })
+};
+
+const addTagToBmark = (request,response) => {
+    let tagid = parseInt(request.params.tagid);
+    let bmarkid = parseInt(request.params.bmarkid);
+    db.query('UPDATE tags SET bookmark_uuid = $1 WHERE tagID = $2',[bmarkid,tagid], (error, results) => {
+        if (error) {
+            response.status(400).send('ERROR 400: Bad Request!')
+            throw error
+        }
+        response.status(200).send('SUCCESS 200: Tag addded to bookmark')
+    })
+};
+
+const remTagFromBmark = (request,response) => {
+    let tagid = parseInt(request.params.tagid);
+    db.query('UPDATE tags SET bookmark_uuid = null WHERE tagID = $1',[tagid], (error, results) => {
+        if (error) {
+            response.status(400).send('ERROR 400: Bad Request!')
+            throw error
+        }
+        response.status(200).send('SUCCESS 200: Tag removed from bookmark')
+    })
+};
+
+
 // display queries
 const getBookmarks = (request, response) => {
-    db.query('SELECT * FROM bookmarks ORDER BY uuid ASC', (error, results) => {
+    db.query('SELECT bookmarks.* , tags.tagID FROM bookmarks LEFT OUTER JOIN tags ON bookmarks.uuid = tags.bookmark_uuid ORDER BY bookmarks.uuid ASC', (error, results) => {
       if (error) {
         response.status(400).send('ERROR 400: BAD Request!')
         throw error
@@ -61,5 +109,9 @@ module.exports = {
     getBookmarks,
     getTags,
     addBookmark,
-    deleteBookmark
+    deleteBookmark,
+    addTag,
+    deleteTag,
+    addTagToBmark,
+    remTagFromBmark
 }

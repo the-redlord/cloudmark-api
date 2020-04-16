@@ -13,7 +13,7 @@ app.use(
 
 //Index Route
 app.get('/', (request, response) => {
-    response.json({ info: 'Node.js, Express, and Postgres API' })
+    response.json({ info: 'Cloudmark - Simple Bookmark API' })
   });
 
 // Bookmark routes
@@ -23,22 +23,13 @@ app.delete('/bookmarks/:id',queries.deleteBookmark);
 
 
 // Tag Routes
-app.post('/tags/create',(request,response) => {
+app.post('/tags/create',queries.addTag);
 
+app.delete('/tags/:id',queries.deleteTag);
 
-});
+app.put('/tags/:tagid/:bmarkid',queries.addTagToBmark);
 
-app.delete('/tags',(request,response)=>{
-
-});
-
-app.put('/api/tag/addtomark',(request,response)=>{
-
-});
-
-app.put('/api/tag/removemark',(request,response)=>{
-
-});
+app.put('/remtag/:tagid',queries.remTagFromBmark);
 
 // Display Routes
 app.get('/bookmarks',queries.getBookmarks);
