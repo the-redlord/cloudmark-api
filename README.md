@@ -1,4 +1,4 @@
-# cloudmark-api [![heroku](https://img.shields.io/badge/heroku-v1.0-purple)](https://cloudmark-api.herokuapp.com/)
+# cloudmark-api [![heroku](https://img.shields.io/badge/heroku-deployed-purple?style=plastic&logo=heroku)](https://cloudmark-api.herokuapp.com/)
 
 A Simple bookmark CRUD API built using NodeJS.
 
