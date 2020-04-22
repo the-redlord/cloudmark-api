@@ -1,4 +1,4 @@
-const db = require('./sql_config');
+const db = require('./config');
 
 // generate timestamp for current time
 const getTimestamp = () => {
@@ -58,7 +58,7 @@ const deleteTag = (request,response) => {
 const addTagToBmark = (request,response) => {
     let tagid = parseInt(request.params.tagid);
     let bmarkid = parseInt(request.params.bmarkid);
-    db.query('INSERT INTO link (bookmark_uuid,tagID) VALUES ($1,$2)',[bmarkid,tagid], (error, results) => {
+    db.query('INSERT INTO connection (bookmark_uuid,tagID) VALUES ($1,$2)',[bmarkid,tagid], (error, results) => {
         if (error) {
             response.status(400).send('ERROR 400: Bad Request!')
             throw error
@@ -70,7 +70,7 @@ const addTagToBmark = (request,response) => {
 const remTagFromBmark = (request,response) => {
     let tagid = parseInt(request.params.tagid);
     let bmarkid = parseInt(request.params.bmarkid);
-    db.query('DELETE FROM tags WHERE bookmark_uuid = $1 AND tagID = $2',[bmarkid,tagid], (error, results) => {
+    db.query('DELETE FROM connection WHERE bookmark_uuid = $1 AND tagID = $2',[bmarkid,tagid], (error, results) => {
         if (error) {
             response.status(400).send('ERROR 400: Bad Request!')
             throw error
@@ -82,7 +82,7 @@ const remTagFromBmark = (request,response) => {
 
 // display queries
 const getBookmarks = (request, response) => {
-    db.query('SELECT bookmarks.* , link.tagID FROM bookmarks LEFT OUTER JOIN link ON bookmarks.uuid = link.bookmark_uuid ORDER BY bookmarks.uuid ASC', (error, results) => {
+    db.query('SELECT bookmarks.* , connection.tagID FROM bookmarks LEFT OUTER JOIN connection ON bookmarks.uuid = connection.bookmark_uuid ORDER BY bookmarks.uuid ASC', (error, results) => {
       if (error) {
         response.status(400).send('ERROR 400: BAD Request!')
         throw error
