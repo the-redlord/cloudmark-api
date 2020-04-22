@@ -1,4 +1,4 @@
-const db = require('./config');
+const db = require('./sql_config');
 
 // generate timestamp for current time
 const getTimestamp = () => {
