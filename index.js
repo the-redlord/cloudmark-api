@@ -29,7 +29,7 @@ app.delete('/tags/:id',queries.deleteTag);
 
 app.put('/tags/:tagid/:bmarkid',queries.addTagToBmark);
 
-app.put('/remtag/:tagid',queries.remTagFromBmark);
+app.put('/remtag/:tagid/:bmarkid',queries.remTagFromBmark);
 
 // Display Routes
 app.get('/bookmarks',queries.getBookmarks);

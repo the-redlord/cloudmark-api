@@ -50,7 +50,7 @@ Deploy to your server to access the API.
 ```
 * Delete a tag -DELETE- /tags/:id
 * Add Tag to bookmark -PUT- /tags/:tagid/:bmarkid
-* Remove tag from bookmark -PUT- /remtag/:tagid
+* Remove tag from bookmark -PUT- /remtag/:tagid/:bmarkid
 
 ### Displaying
 

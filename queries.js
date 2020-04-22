@@ -34,7 +34,7 @@ const deleteBookmark = (request,response) => {
 // tags queries
 const addTag = (request,response) => {
     let {title} = request.body;
-    db.query('INSERT INTO tags (title,time_created,time_updated,bookmark_uuid) VALUES ($1,$2,$3,null)',[title,getTimestamp(),getTimestamp()], (error, results) => {
+    db.query('INSERT INTO tags (title,time_created,time_updated) VALUES ($1,$2,$3)',[title,getTimestamp(),getTimestamp()], (error, results) => {
         if (error) {
             response.status(400).send('ERROR 400: Bad Request!')
             throw error
@@ -58,7 +58,7 @@ const deleteTag = (request,response) => {
 const addTagToBmark = (request,response) => {
     let tagid = parseInt(request.params.tagid);
     let bmarkid = parseInt(request.params.bmarkid);
-    db.query('UPDATE tags SET bookmark_uuid = $1 WHERE tagID = $2',[bmarkid,tagid], (error, results) => {
+    db.query('INSERT INTO link (bookmark_uuid,tagID) VALUES ($1,$2)',[bmarkid,tagid], (error, results) => {
         if (error) {
             response.status(400).send('ERROR 400: Bad Request!')
             throw error
@@ -69,7 +69,8 @@ const addTagToBmark = (request,response) => {
 
 const remTagFromBmark = (request,response) => {
     let tagid = parseInt(request.params.tagid);
-    db.query('UPDATE tags SET bookmark_uuid = null WHERE tagID = $1',[tagid], (error, results) => {
+    let bmarkid = parseInt(request.params.bmarkid);
+    db.query('DELETE FROM tags WHERE bookmark_uuid = $1 AND tagID = $2',[bmarkid,tagid], (error, results) => {
         if (error) {
             response.status(400).send('ERROR 400: Bad Request!')
             throw error
@@ -81,7 +82,7 @@ const remTagFromBmark = (request,response) => {
 
 // display queries
 const getBookmarks = (request, response) => {
-    db.query('SELECT bookmarks.* , tags.tagID FROM bookmarks LEFT OUTER JOIN tags ON bookmarks.uuid = tags.bookmark_uuid ORDER BY bookmarks.uuid ASC', (error, results) => {
+    db.query('SELECT bookmarks.* , link.tagID FROM bookmarks LEFT OUTER JOIN link ON bookmarks.uuid = link.bookmark_uuid ORDER BY bookmarks.uuid ASC', (error, results) => {
       if (error) {
         response.status(400).send('ERROR 400: BAD Request!')
         throw error
